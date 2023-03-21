@@ -2,8 +2,9 @@
 
 alphabet = 'abcdefghijklmnopqrstuvwyzàáãâéêóôõíúçABCDEFGHIJKLMNOPQRSTUVWYZÀÁÃÂÉÊÓÕÍÚÇ'
     
-
 def ceasar(message, key=1, mode='e'):
+
+    string_validate(message)
 
     def __index_rotation(position):
         alphabet_positions = len(alphabet)
@@ -47,7 +48,8 @@ def string_validate(message):
         c_index = alphabet.find(c)
         if c_index == -1:
             print(f"Character: {alphabet[c_index]} invalid!")
-            return 1
+            # return 1
+            raise("Invalid character!")
     return message
 
 mode = input("[e] To encrypt and [d] To decrypt:\n")
