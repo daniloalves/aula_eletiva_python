@@ -1,7 +1,8 @@
 
 
 alphabet = 'abcdefghijklmnopqrstuvwyzàáãâéêóôõíúçABCDEFGHIJKLMNOPQRSTUVWYZÀÁÃÂÉÊÓÕÍÚÇ'
-    
+non_alphabet = ["."," ",","]
+
 def ceasar(message, key=1, mode='e'):
 
     string_validate(message)
@@ -11,7 +12,7 @@ def ceasar(message, key=1, mode='e'):
 
         if position >= alphabet_positions:
             return position - alphabet_positions
-        elif position <= 0:
+        elif position < 0:
             return position + alphabet_positions
         else:
             return position
@@ -19,17 +20,21 @@ def ceasar(message, key=1, mode='e'):
     def __index_generate():
         converted_msg = ''
         for c in message:
-            c_index = alphabet.find(c)
 
-            if mode == 'e':
-                new_index = c_index + key
-            elif mode == 'd':
-                new_index = c_index - key
+            if c in non_alphabet:
+                converted_msg = converted_msg + c
+            else:
+                pass
+                c_index = alphabet.find(c)
 
-            new_position = __index_rotation(new_index)
-            
-            converted_msg = converted_msg + alphabet[new_position] 
+                if mode == 'e':
+                    new_index = c_index + key
+                elif mode == 'd':
+                    new_index = c_index - key
 
+                new_position = __index_rotation(new_index)
+                converted_msg = converted_msg + alphabet[new_position] 
+# uftuf eb uftub
         return converted_msg
 
     def __encrypt():
@@ -46,7 +51,7 @@ def ceasar(message, key=1, mode='e'):
 def string_validate(message):
     for c in message:
         c_index = alphabet.find(c)
-        if c_index == -1:
+        if c_index == -1 and c not in non_alphabet:
             print(f"Character: {alphabet[c_index]} invalid!")
             # return 1
             raise("Invalid character!")
